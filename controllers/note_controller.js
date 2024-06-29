@@ -10,7 +10,7 @@ export const addNote = async (req, res) => {
 export const getNotes = async (req, res, next) => {
     try {
         const allNotes = await NoteModel.find()
-        res.json(allNotes)
+        res.status(200).send(allNotes)
     } catch (error) {
         next(error)
     }
@@ -19,18 +19,19 @@ export const getNotes = async (req, res, next) => {
 // Get one note
 export const getOneNote = async (req, res) => {
     const oneNote = await NoteModel.findById(req.params.id)
-    res.json(oneNote)
+    res.status(200).send(oneNote)
 }
 
 // update one note
 export const updateNote = async (req, res) => {
     const chosenTitle = req.body.title;
-    const patchNote = await NoteModel.findByIdAndUpdate(req.params.id, { title: chosenTitle });
-    res.json(patchNote)
+    const chosenMessage = req.body.message;
+    const patchNote = await NoteModel.findByIdAndUpdate(req.params.id, { title: chosenTitle, message: chosenMessage });
+    res.status(200).send(patchNote)
 }
 
 // delete one note
 export const deleteNote = async (req, res) => {
     const deleteNoteById = await NoteModel.findByIdAndDelete(req.params.id);
-    res.json(`Note with id ${req.params.id} deleted`);
+    res.status(200).send(`Note with id ${req.params.id} deleted`);
 }

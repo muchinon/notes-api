@@ -3,9 +3,9 @@ import { addNote, deleteNote, getNotes, getOneNote, updateNote } from "../contro
 
 const noteRouter = Router();
 
-noteRouter.post('/', addNote)
+noteRouter.post('/notes', addNote)
 
-noteRouter.get('/', getNotes)
+noteRouter.get('/notes', getNotes)
 
 noteRouter.get('/notes/:id', getOneNote)
 
